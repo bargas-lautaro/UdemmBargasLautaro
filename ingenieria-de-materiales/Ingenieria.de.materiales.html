@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería de los Materiales | TRON</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a2a 0%, #000000 100%);
+            color: #00ffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efectos de fondo con líneas estilo TRON */
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 95%, rgba(0, 255, 255, 0.03) 100%),
+                linear-gradient(0deg, transparent 95%, rgba(0, 255, 255, 0.03) 100%);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        .grid-lines-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%);
+            background-size: 100px 100px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #8af8ff;
+            letter-spacing: 3px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .content-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-shadow: 0 0 5px #00ffff;
+            border-left: 3px solid #00ffff;
+            padding-left: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background: rgba(10, 20, 40, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            border-color: #00ffff;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .card-content {
+            line-height: 1.6;
+            color: #a0f0ff;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 40px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .back-button:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 20px #00ffff;
+            text-shadow: 0 0 10px #ffffff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            margin-top: 60px;
+            color: #8af8ff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Efectos de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #00ffff;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-lines"></div>
+    <div class="grid-lines-2"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Ingeniería de los Materiales</h1>
+            <div class="subtitle">
+                <!-- Añade aquí tu subtítulo -->
+            </div>
+        </header>
+        
+        <main>
+            <section class="content-section">
+                <h2 class="section-title">Título de Sección 1</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3 class="card-title">Título de Tarjeta 1</h3>
+                        <p class="card-content">
+                            <!-- Añade aquí el contenido de esta tarjeta -->
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="card-title">Título de Tarjeta 2</h3>
+                        <p class="card-content">
+                            <!-- Añade aquí el contenido de esta tarjeta -->
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="card-title">Título de Tarjeta 3</h3>
+                        <p class="card-content">
+                            <!-- Añade aquí el contenido de esta tarjeta -->
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="content-section">
+                <h2 class="section-title">Título de Sección 2</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3 class="card-title">Título de Tarjeta 1</h3>
+                        <p class="card-content">
+                            <!-- Añade aquí el contenido de esta tarjeta -->
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="card-title">Título de Tarjeta 2</h3>
+                        <p class="card-content">
+                            <!-- Añade aquí el contenido de esta tarjeta -->
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="card-title">Título de Tarjeta 3</h3>
+                        <p class="card-content">
+                            <!-- Añade aquí el contenido de esta tarjeta -->
+                        </p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="card-title">Título de Tarjeta 4</h3>
+                        <p class="card-content">
+                            <!-- Añade aquí el contenido de esta tarjeta -->
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Añade más secciones según necesites -->
+            
+            <div style="text-align: center;">
+                <a href="index.html" class="back-button">Volver al Sistema</a>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Sistema de Información de Materiales | Diseñado con Estética TRON</p>
+        </footer>
+    </div>
+
+    <script>
+        // Crear partículas flotantes
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Posición aleatoria
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 10 + Math.random() * 10;
+                
+                particle.style.left = `${left}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Inicializar partículas al cargar la página
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+</html>
