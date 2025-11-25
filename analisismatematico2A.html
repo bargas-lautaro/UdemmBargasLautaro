@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>BargasLautaro - Resumen Integrales GRID 3 Columnas</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(','\\)'], ['$', '$']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script async id="MathJax-script"
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <style>
+        :root {
+            --c1: #00ff99;
+            --c2: #00ffff;
+            --c3: #ff00ff;
+            --c4: #ffff00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            color: var(--c1);
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        h1.titulo {
+            width: 100%;
+            text-align: center;
+            color: var(--c2);
+            margin-top: 2%;
+            margin-bottom: 1%;
+            font-size: clamp(1.6rem, 2vw + 1rem, 3rem);
+            text-shadow: 0 0 20px var(--c2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: auto;
+            gap: 2%;
+            width: 96%;
+            margin: 2% auto 8% auto;
+        }
+
+        .item {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0,255,153,0.4);
+            border-radius: 8px;
+            padding: 2%;
+            font-size: clamp(1rem, 1vw + 0.5rem, 1.5rem);
+            animation: colorShift 12s infinite alternate linear,
+                       glow 4s infinite alternate ease-in-out;
+        }
+
+        .item small {
+            display: block;
+            font-size: 0.75em;
+            opacity: 0.85;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        @keyframes colorShift {
+            0%   { color: var(--c1); border-color: var(--c1); }
+            25%  { color: var(--c2); border-color: var(--c2); }
+            50%  { color: var(--c3); border-color: var(--c3); }
+            75%  { color: var(--c4); border-color: var(--c4); }
+            100% { color: var(--c1); border-color: var(--c1); }
+        }
+
+        @keyframes glow {
+            0%   { filter: brightness(0.8); }
+            50%  { filter: brightness(1.5); }
+            100% { filter: brightness(1.0); }
+        }
+
+        h4.firma {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 4px 8px;
+            background-color: #000000;
+            color: #ffffff;
+            border-top: 3px solid #00ff00;
+            border-left: 3px solid #00ff00;
+            border-right: 3px solid #00ff00;
+            font-size: 0.85rem;
+            text-align: right;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="titulo">Resumen de Integrales y Teoremas</h1>
+
+    <div class="grid">
+
+        <div class="item">
+            <small>Área por integral doble</small>
+            \( A = \iint_D 1\, dA \)
+        </div>
+
+        <div class="item">
+            <small>Integral doble – Región tipo I</small>
+            \( \iint_D f(x,y)\, dA
+               = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y)\, dy\, dx \)
+        </div>
+
+        <div class="item">
+            <small>Integral doble – Región tipo II</small>
+            \( \iint_D f(x,y)\, dA
+               = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x,y)\, dx\, dy \)
+        </div>
+
+        <div class="item">
+            <small>Coordenadas polares</small>
+            \( x = r\cos\theta,\quad y = r\sin\theta \)<br>
+            \( dA = r\, dr\, d\theta \)
+        </div>
+
+        <div class="item">
+            <small>Integral triple</small>
+            \( \iiint_E f(x,y,z)\, dV \)
+        </div>
+
+        <div class="item">
+            <small>Volumen cilíndrico</small>
+            \( dV = r\, dr\, d\theta\, dz \)
+        </div>
+
+        <div class="item">
+            <small>Volumen esférico</small>
+            \( dV = \rho^2 \sin\varphi\, d\rho\, d\varphi\, d\theta \)
+        </div>
+
+        <div class="item">
+            <small>Superficie paramétrica</small>
+            Sea \( \vec r(u,v) = (x(u,v),y(u,v),z(u,v)) \).<br>
+            \( dS = \|\vec r_u \times \vec r_v\|\, du\, dv \)
+        </div>
+
+        <div class="item">
+            <small>Superficie como z = g(x,y)</small>
+            \( \vec r(x,y) = (x,\; y,\; g(x,y)) \)<br>
+            \( \vec r_x = (1,0,g_x),\ \vec r_y = (0,1,g_y) \)<br>
+            \( \vec r_x \times \vec r_y = (-g_x,\,-g_y,\;1) \)<br>
+            \( dS = \|\vec r_x \times \vec r_y\|\, dx\, dy \)
+        </div>
+
+        <div class="item">
+            <small>Normal y normal unitaria</small>
+            Normal no unitaria:
+            \( \vec n\, dS = \vec r_u \times \vec r_v\, du\, dv \)<br>
+            Normal unitaria:
+            \( \hat n =
+            \dfrac{\vec r_u \times \vec r_v}{\|\vec r_u \times \vec r_v\|} \)
+        </div>
+
+        <div class="item">
+            <small>Flujo de campo vectorial</small>
+            \( \iint_S \vec F\cdot \vec n\, dS
+             = \iint_D \vec F(\vec r(u,v))\cdot
+             (\vec r_u \times \vec r_v)\, du\, dv \)
+        </div>
+
+        <div class="item">
+            <small>Integral de línea escalar</small>
+            \( \int_C f\, ds
+             = \int_a^b f(\vec r(t))\, \|\vec r'(t)\|\, dt \)<br>
+            \( ds = \|\vec r'(t)\|\, dt \)
+        </div>
+
+        <div class="item">
+            <small>Integral de línea vectorial</small>
+            \( \int_C \vec F\cdot d\vec r
+             = \int_a^b \vec F(\vec r(t))\cdot \vec r'(t)\, dt \)<br>
+            En coordenadas:
+            \( \int_C P\, dx + Q\, dy + R\, dz \)
+        </div>
+
+        <div class="item">
+            <small>Teorema de Green</small>
+            \( \oint_C P\, dx + Q\, dy
+             = \iint_D \bigg(
+             \dfrac{\partial Q}{\partial x}
+             - \dfrac{\partial P}{\partial y}
+             \bigg)\, dA \)
+        </div>
+
+        <div class="item">
+            <small>Rotor</small>
+            Para \( \vec F = (P,Q,R) \):<br>
+            \( \nabla\times\vec F =
+            \big(
+            R_y - Q_z,\;
+            P_z - R_x,\;
+            Q_x - P_y
+            \big) \)
+        </div>
+
+        <div class="item">
+            <small>Teorema de Stokes</small>
+            \( \oint_C \vec F\cdot d\vec r
+             = \iint_S (\nabla\times \vec F)\cdot \vec n\, dS \)<br>
+            En paramétricas:<br>
+            \( \iint_S (\nabla\times \vec F)\cdot
+              (\vec r_u \times \vec r_v)\, du\, dv \)
+        </div>
+
+        <div class="item">
+            <small>Divergencia</small>
+            Para \( \vec F = (F_1,F_2,F_3) \):<br>
+            \( \nabla\cdot \vec F =
+            \dfrac{\partial F_1}{\partial x} +
+            \dfrac{\partial F_2}{\partial y} +
+            \dfrac{\partial F_3}{\partial z} \)
+        </div>
+
+        <div class="item">
+            <small>Teorema de la divergencia</small>
+            \( \iint_{\partial E} \vec F\cdot \vec n\, dS
+             = \iiint_E (\nabla\cdot \vec F)\, dV \)
+        </div>
+
+        <div class="item">
+            <small>Plano, normales y superficies clásicas</small>
+            Plano \( Ax + By + Cz = D \):<br>
+            \( \vec n = (A,B,C) \)<br><br>
+            Cilindro \( x^2 + y^2 = R^2 \):<br>
+            \( dS = R\, d\theta\, dz \)<br><br>
+            Esfera \( x^2 + y^2 + z^2 = R^2 \):<br>
+            \( dS = R^2 \sin\varphi\, d\varphi\, d\theta \)
+        </div>
+
+        <div class="item">
+            <small>Cambio de variables en R²</small>
+            \( \iint_D f(x,y)\, dx\, dy
+             = \iint_{D'} f(x(u,v),y(u,v))\,
+             |J(u,v)|\, du\, dv \)
+        </div>
+
+        <div class="item">
+            <small>Jacobiano</small>
+            \( J(u,v) =
+            \begin{vmatrix}
+            x_u & x_v\\[2pt]
+            y_u & y_v
+            \end{vmatrix}
+            \)
+        </div>
+
+    </div>
+
+    <h4 class="firma">Bargas Nehuen Lautaro – 25/11/2025</h4>
+
+</body>
+</html>
