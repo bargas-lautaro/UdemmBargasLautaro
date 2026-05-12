@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento Ingeniería Mecánica - Bargas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+
+        .status-completada {
+            background-color: rgba(236, 72, 153, 0.2) !important;
+            border: 2px solid #ec4899 !important;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .status-proceso {
+            background-color: rgba(34, 197, 94, 0.1) !important;
+            border: 2px solid #22c55e !important;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .es-intermedio {
+            border-style: dashed !important;
+            border-width: 2px !important;
+            border-color: #94a3b8 !important;
+            position: relative;
+        }
+
+        .subject-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            min-height: 80px;
+            position: relative;
+        }
+
+        .subject-card:hover {
+            transform: scale(1.02);
+            filter: brightness(1.2);
+        }
+
+        .grid-all {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .tab-active {
+            background-color: #3b82f6 !important;
+            color: white !important;
+        }
+
+        /* Efecto hover para el enlace */
+        .link-icon:hover {
+            color: #60a5fa;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8">
+
+    <header class="max-w-7xl mx-auto mb-8 text-center">
+        <h1 class="text-3xl font-bold text-blue-400 mb-2">Ingeniería Mecánica - UdeMM</h1>
+        <p class="text-slate-400">Control de Materias</p>
+
+        <div class="flex flex-wrap justify-center gap-3 mt-6">
+            <button onclick="setView('year')" id="btn-year"
+                class="px-4 py-2 bg-slate-800 rounded-lg text-sm font-semibold tab-active">Por Año</button>
+            <button onclick="setView('all')" id="btn-all"
+                class="px-4 py-2 bg-slate-800 rounded-lg text-sm font-semibold">Todas Juntas</button>
+            <button onclick="setView('intermedio')" id="btn-intermedio"
+                class="px-4 py-2 bg-slate-800 rounded-lg text-sm font-semibold text-yellow-400 border border-yellow-600/30">Intermedio</button>
+            <button onclick="setView('van')" id="btn-van"
+                class="px-4 py-2 bg-slate-800 rounded-lg text-sm font-semibold">Las que van</button>
+            <button onclick="setView('proceso')" id="btn-proceso"
+                class="px-4 py-2 bg-slate-800 rounded-lg text-sm font-semibold text-emerald-400">En Proceso</button>
+            <button onclick="setView('faltan')" id="btn-faltan"
+                class="px-4 py-2 bg-slate-800 rounded-lg text-sm font-semibold">Las que faltan</button>
+        </div>
+    </header>
+
+    <main id="container" class="max-w-7xl mx-auto">
+    </main>
+
+    <footer class="mt-12 text-center text-slate-500 text-xs">
+        <p>Borde Verde = En Proceso | Resaltado Rosado = Completada</p>
+        <p class="mt-2">Haz clic en el fondo de la materia para alternar su estado. Haz clic en el ícono superior
+            derecho para abrir su página web.</p>
+    </footer>
+
+    <script>
+        // Aquí debes reemplazar los enlaces dentro de url: "tu_enlace_aqui"
+        const materias = [
+            // 1er Año
+            { code: "IM-101", name: "Análisis Matemático I", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-102", name: "Fundamentos de Programación", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-103", name: "Sistemas de Representación", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-104", name: "Metrología", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-105", name: "Organización de Empresas", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-106", name: "Álgebra y Geometría Analítica", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-107", name: "Física I", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-108", name: "Diseño Digital", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-109", name: "Química General", year: 1, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+
+            // 2do Año
+            { code: "IM-201", name: "Análisis Matemático II A", year: 2, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-202", name: "Física II A", year: 2, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-203", name: "Fundamentos de Economía", year: 2, status: 'proceso', intermediate: true, url: "https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos.de.la.economia2.html" },
+            { code: "IM-204", name: "Estabilidad I", year: 2, status: 'proceso', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-205", name: "Análisis Matemático II B", year: 2, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-206", name: "Física II B", year: 2, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-207", name: "Seguridad, Higiene y M.A.", year: 2, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-208", name: "Resistencia de Materiales", year: 2, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-209", name: "Ing. de Materiales I", year: 2, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+
+            // 3er Año
+            { code: "IM-301", name: "Tecnología Mecánica", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-302", name: "Termodinámica", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-303", name: "Estabilidad II", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-304", name: "Electrotecnia", year: 3, status: 'proceso', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-305", name: "Ing. de Materiales II", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-306", name: "Probabilidad y Estadística", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-307", name: "Mecánica de los Fluidos", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-308", name: "Máquinas Eléctricas", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-309", name: "Mecánica", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-310", name: "Fund. de Electrónica", year: 3, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+
+            // 4to Año
+            { code: "IM-401", name: "Turbomáquinas", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-402", name: "Metodología de la Inv.", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-403", name: "Tecnología del Calor", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-404", name: "Gestión de la Calidad", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-405", name: "Control Industrial", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-406", name: "Elementos de Máquinas", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-407", name: "Máquinas Térmicas A", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-408", name: "Mecanismos Hidr. y Neum.", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-409", name: "Gestión de Proyectos", year: 4, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-410", name: "Electiva I", year: 4, status: 'aprobada', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+
+            // 5to Año
+            { code: "IM-501", name: "Proyecto Mecánico Int. I", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-502", name: "Energías Alternativas", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-503", name: "Sist. Elevación y Transp.", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-504", name: "Instal. Termomecánicas", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-505", name: "Proyecto Mecánico Int. II", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-506", name: "Gestión del Mant.", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-507", name: "Instalaciones Industriales", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-508", name: "Legislación y Ejercicio Prof.", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-509", name: "Electiva II", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "IM-510", name: "PPS", year: 5, status: 'pendiente', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+
+            // Otros / Talleres / Electivas adicionales
+            { code: "T-01", name: "Inglés I", year: 6, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "T-02", name: "Inglés II", year: 6, status: 'proceso', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "T-03", name: "Comunicación Efectiva 1", year: 6, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "T-04", name: "Comunicación Efectiva 2", year: 6, status: 'aprobada', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "T-05", name: "Trabajo Colaborativo 1", year: 6, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "T-06", name: "Trabajo Colaborativo 2", year: 6, status: 'pendiente', intermediate: true, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" },
+            { code: "E-01", name: "Comercialización", year: 6, status: 'proceso', intermediate: false, url: "https://udemm.edu.ar/carreras/ingenieria-mecanica/" }
+        ];
+
+        let currentView = 'year';
+
+        function createCard(m) {
+            let statusClass = '';
+            let icon = '';
+
+            if (m.status === 'aprobada') {
+                statusClass = 'status-completada';
+                icon = '<span class="text-pink-500 text-xs">✔</span>';
+            } else if (m.status === 'proceso') {
+                statusClass = 'status-proceso';
+                icon = '<span class="text-emerald-400 text-xs">⏳</span>';
+            }
+
+            return `
+                <div onclick="toggleMateria('${m.code}')" 
+                     class="subject-card p-3 rounded-lg border border-slate-700 bg-slate-800 flex flex-col justify-between ${statusClass} ${m.intermediate ? 'es-intermedio' : ''}">
+                    
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] text-slate-400 font-mono">${m.code}</span>
+                        <a href="${m.url}" target="_blank" onclick="event.stopPropagation()" class="text-slate-400 link-icon transition-all" title="Abrir página de la materia">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <h3 class="text-xs font-bold leading-tight mt-1 mb-2">${m.name}</h3>
+                    <div class="flex justify-between items-center">
+                        <span class="text-[9px] px-1 bg-slate-900 rounded">${m.year < 6 ? m.year + '° AÑO' : 'OTRO'}</span>
+                        ${icon}
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleMateria(code) {
+            const m = materias.find(x => x.code === code);
+            if (m.status === 'pendiente') {
+                m.status = 'proceso';
+            } else if (m.status === 'proceso') {
+                m.status = 'aprobada';
+            } else {
+                m.status = 'pendiente';
+            }
+            render();
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.querySelectorAll('header button').forEach(b => b.classList.remove('tab-active'));
+            document.getElementById('btn-' + view).classList.add('tab-active');
+            render();
+        }
+
+        function render() {
+            const container = document.getElementById('container');
+            container.innerHTML = '';
+
+            if (currentView === 'year') {
+                for (let i = 1; i <= 6; i++) {
+                    const yearList = materias.filter(m => m.year === i);
+                    if (yearList.length === 0) continue;
+
+                    const section = document.createElement('div');
+                    section.className = 'mb-8';
+                    const title = i === 6 ? 'Otros Requisitos / Talleres / Electivas' : `${i}° Año`;
+                    section.innerHTML = `
+                        <h2 class="text-xl font-bold text-slate-300 mb-4 border-l-4 border-blue-500 pl-3">${title}</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                            ${yearList.map(m => createCard(m)).join('')}
+                        </div>
+                    `;
+                    container.appendChild(section);
+                }
+            } else {
+                let filtered = materias;
+                let listTitle = "Todas Juntas";
+                let statsText = "";
+                const totalMaterias = materias.length;
+
+                if (currentView === 'van') {
+                    filtered = materias.filter(m => m.status === 'aprobada');
+                    listTitle = "Las que van (Aprobadas)";
+                    statsText = `(${filtered.length} materias)`;
+                } else if (currentView === 'proceso') {
+                    filtered = materias.filter(m => m.status === 'proceso');
+                    listTitle = "En Proceso";
+                    statsText = `(${filtered.length} materias)`;
+                } else if (currentView === 'faltan') {
+                    filtered = materias.filter(m => m.status === 'pendiente');
+                    const percFaltan = ((filtered.length / totalMaterias) * 100).toFixed(1);
+                    listTitle = "Las que faltan";
+                    statsText = `- Representa el ${percFaltan}% de toda la carrera`;
+                } else if (currentView === 'intermedio') {
+                    filtered = materias.filter(m => m.intermediate);
+                    const aprobadasInt = filtered.filter(m => m.status === 'aprobada').length;
+                    const percInt = ((aprobadasInt / filtered.length) * 100).toFixed(1);
+                    listTitle = "INTERMEDIO";
+                    statsText = `- ${percInt}% Completado (${aprobadasInt}/${filtered.length})`;
+                } else {
+                    const aprobadasTot = materias.filter(m => m.status === 'aprobada').length;
+                    const percTot = ((aprobadasTot / totalMaterias) * 100).toFixed(1);
+                    listTitle = "Todas Juntas";
+                    statsText = `- Avance Global: ${percTot}% Completado`;
+                }
+
+                const section = document.createElement('div');
+                section.className = 'mb-8';
+                section.innerHTML = `
+                    <h2 class="text-xl font-bold text-slate-300 mb-4 border-l-4 border-yellow-500 pl-3 uppercase">
+                        ${listTitle} <span class="text-sm text-slate-400 font-normal ml-2 normal-case tracking-normal">${statsText}</span>
+                    </h2>
+                    <div class="grid-all">
+                        ${filtered.map(m => createCard(m)).join('')}
+                    </div>
+                `;
+                container.appendChild(section);
+            }
+        }
+
+        render();
+    </script>
+</body>
+
+</html>
