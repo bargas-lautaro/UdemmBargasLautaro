@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de la economía</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --hover-color: #2980b9;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Cuadro principal */
+        .contenedor-principal {
+            max-width: 1200px;
+            width: 100%;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .cabecera {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--bg-color);
+        }
+
+        .cabecera h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+        }
+
+        .cabecera h2 {
+            color: #7f8c8d;
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Grilla de capítulos */
+        .grilla-temas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Tarjeta de cada capítulo */
+        .tarjeta-capitulo {
+            background-color: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tarjeta-capitulo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-color: var(--accent-color);
+        }
+
+        .tarjeta-capitulo h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .tarjeta-capitulo ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .tarjeta-capitulo li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Estilos para los hipervínculos de los conceptos */
+        .tarjeta-capitulo li a {
+            color: #4a5568;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: inline-block; /* Hace que el área clickeable sea un poco mejor */
+        }
+
+        .tarjeta-capitulo li a:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* Viñeta personalizada */
+        .tarjeta-capitulo li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+            top: -2px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .grilla-temas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-principal">
+        <div class="cabecera">
+            <h1>Fundamentos de la economía</h1>
+            <h2>Basado en: Economía - Samuelson y Nordhaus (18° Edición)</h2>
+        </div>
+
+        <div class="grilla-temas">
+            <!-- Capítulo 1 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 1: Fundamentos de la economía</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Escasez-y-eficiencia.html" target="_blank">Escasez y eficiencia</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Microeconomía-y-macroeconomía.html" target="_blank">Microeconomía y macroeconomía</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Tres-problemas-de-la-organización-económica.html" target="_blank">Tres problemas de la organización económica</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Posibilidades-tecnológicas-de-la-sociedad.html" target="_blank">Posibilidades tecnológicas de la sociedad</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 2 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 2: La moderna economía mixta</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/El-mecanismo-de-mercado.html" target="_blank">El mecanismo de mercado</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Comercio-dinero-y-capital.html" target="_blank">Comercio, dinero y capital</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/El-papel-económico-del-Estado.html" target="_blank">El papel económico del Estado</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 3 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 3: Conceptos básicos de oferta y demanda</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/La-tabla-de-la-demanda.html" target="_blank">La tabla de la demanda</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/La-tabla-de-la-oferta.html" target="_blank">La tabla de la oferta</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Equilibrio-de-la-oferta-y-la-demanda.html" target="_blank">Equilibrio de la oferta y la demanda</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 4 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 4: Oferta y demanda: elasticidad y aplicaciones</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Elasticidad-precio-de-la-demanda-y-oferta.html" target="_blank">Elasticidad-precio de la demanda y oferta</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Análisis-económico-de-la-agricultura.html" target="_blank">Análisis económico de la agricultura</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Efecto-de-un-impuesto.html" target="_blank">Efecto de un impuesto</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Precios-mínimos-y-máximos.html" target="_blank">Precios mínimos y máximos</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 5 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 5: Demanda y comportamiento del consumidor</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Elección-y-utilidad.html" target="_blank">Elección y utilidad</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Condición-de-equilibrio.html" target="_blank">Condición de equilibrio</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Excedente-del-consumidor.html" target="_blank">Excedente del consumidor</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 6 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 6: Producción y organización de los negocios</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Teoría-de-la-producción-y-productos-marginales.html" target="_blank">Teoría de la producción y productos marginales</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Rendimientos-a-escala.html" target="_blank">Rendimientos a escala</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Organización-de-las-empresas.html" target="_blank">Organización de las empresas</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 7 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 7: Análisis de costes</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Costes-totales-fijos-y-variables.html" target="_blank">Costes totales, fijos y variables</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Coste-marginal-y-medio.html" target="_blank">Coste marginal y medio</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Costes-de-oportunidad.html" target="_blank">Costes de oportunidad</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 8 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 8: Análisis de los mercados perfectamente competitivos</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Comportamiento-de-la-empresa-competitiva.html" target="_blank">Comportamiento de la empresa competitiva</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Eficiencia-y-equidad-de-los-mercados.html" target="_blank">Eficiencia y equidad de los mercados</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Condición-de-cierre.html" target="_blank">Condición de cierre</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 9 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 9: La competencia imperfecta y el monopolio</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Patrones-de-la-competencia-imperfecta.html" target="_blank">Patrones de la competencia imperfecta</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Ingreso-marginal-y-monopolio.html" target="_blank">Ingreso marginal y monopolio</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Maximización-de-beneficios.html" target="_blank">Maximización de beneficios</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 10 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 10: El oligopolio y la competencia monopolística</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Comportamiento-de-los-competidores-imperfectos.html" target="_blank">Comportamiento de los competidores imperfectos</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Innovación-e-información.html" target="_blank">Innovación e información</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Consecuencias-económicas-de-la-innovación.html" target="_blank">Consecuencias económicas de la innovación</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 11 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 11: La incertidumbre y la teoría de los juegos</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Análisis-económico-del-riesgo.html" target="_blank">Análisis económico del riesgo</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Seguros-y-riesgo-moral.html" target="_blank">Seguros y riesgo moral</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Estrategia-y-la-teoría-de-los-juegos.html" target="_blank">Estrategia y la teoría de los juegos</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Dilema-del-prisionero.html" target="_blank">Dilema del prisionero</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 12 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 12: Cómo determinan los mercados las rentas</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Ingreso-y-riqueza.html" target="_blank">Ingreso y riqueza</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Productividad-marginal.html" target="_blank">Productividad marginal</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Distribución-de-la-renta-nacional.html" target="_blank">Distribución de la renta nacional</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 13 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 13: El mercado de trabajo</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Demanda-y-oferta-de-trabajo.html" target="_blank">Demanda y oferta de trabajo</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Sindicatos-y-negociación-colectiva.html" target="_blank">Sindicatos y negociación colectiva</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Discriminación-económica.html" target="_blank">Discriminación económica</a></li>
+                </ul>
+            </div>
+
+            <!-- Capítulo 14 -->
+            <div class="tarjeta-capitulo">
+                <h3>Lecture 14: La tierra y el capital</h3>
+                <ul>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Tierra-y-renta.html" target="_blank">Tierra y renta</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Capital-e-interés.html" target="_blank">Capital e interés</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Valor-presente-de-los-activos.html" target="_blank">Valor presente de los activos</a></li>
+                    <li><a href="https://htmlpreview.github.io/?https://github.com/bargas-lautaro/UdemmBargasLautaro/blob/main/Fundamentos-de-la-economia/Rendimiento-del-capital.html" target="_blank">Rendimiento del capital</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
